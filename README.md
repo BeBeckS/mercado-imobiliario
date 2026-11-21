@@ -26,6 +26,8 @@ data/raw/             dados locais protegidos; apenas .gitkeep é versionável
 main.py             execução
 requirements.txt    dependências
 .env.example        exemplo de configuração
+Dockerfile          imagem da aplicação
+.dockerignore       exclusões do contexto de build
 ```
 
 ## Configuração e instalação
@@ -60,6 +62,30 @@ $env:RUN_HTTP_DIAGNOSTIC = "0"
 ```
 
 Com o ambiente virtual ativado, também é possível executar `python main.py` e `python -m pytest -q`. Os testes padrão são offline: usam HTML e JSON sintéticos e respostas HTTP simuladas, sem depender de `.env` ou das variáveis de configuração externas. O diagnóstico HTTP real é o único teste ignorado por padrão e só realiza acesso se `RUN_HTTP_DIAGNOSTIC=1` for definido; para garantir a suíte offline mesmo quando essa variável existir no ambiente, configure-a como `0`, conforme acima.
+
+### Execução com Docker
+
+A imagem `mercado-imobiliario-coleta:latest` executa a coleta de forma isolada, sem depender do Python instalado localmente. Com o Docker instalado, construa a imagem:
+
+```powershell
+docker build -t mercado-imobiliario-coleta:latest .
+```
+
+Configure o arquivo `.env` e execute a coleta carregando suas variáveis com `--env-file .env`:
+
+```powershell
+docker run --rm --env-file .env -v mercado-imobiliario-data:/app/data mercado-imobiliario-coleta:latest
+```
+
+O container executa `python main.py`. O volume Docker `mercado-imobiliario-data`, montado em `/app/data`, preserva o arquivo principal `properties.json` e os snapshots após a remoção do container, permitindo seu consumo posterior por outros módulos. Para usar esse volume, mantenha `OUTPUT_DIR=data` ou configure `OUTPUT_DIR=/app/data` no `.env`; outros caminhos não serão persistidos nesse volume. Caminhos como `LOCAL_HTML_PATH` devem ser válidos dentro do container Linux. O `.env` e os dados locais não são incorporados à imagem.
+
+#### Verificar os arquivos no volume
+
+Após executar a coleta, liste os arquivos com o volume montado somente para leitura:
+
+```powershell
+docker run --rm --network none --mount type=volume,source=mercado-imobiliario-data,target=/app/data,readonly --entrypoint ls mercado-imobiliario-coleta:latest -laR /app/data
+```
 
 Antes de buscar dados, o coletor consulta o `robots.txt` da mesma origem. Se ele não estiver acessível, não puder ser validado ou não permitir a URL para o agente, a execução termina com erro. HTML e conteúdo incompatível são rejeitados mesmo com HTTP 200; por precaução, arquivos vazios ou apenas com comentários também são recusados por não permitirem verificar a política. O tipo HTTP por si só não determina a validade do conteúdo. Um `Crawl-delay` superior ao intervalo configurado ou uma regra `Request-rate` também interrompe a execução. HTTP diferente de 200, inclusive redirecionamentos, timeout, tipo de resposta inesperado e estrutura inválida causam erro explícito e código de saída diferente de zero. Os logs HTTP informam método, host, caminho e status sem a query ou o fragmento; erros de rede informam o tipo da exceção, não sua mensagem potencialmente sensível. O cliente limita os logs de `urllib3` a `ERROR` no processo para evitar que mensagens de depuração ou repetição exponham queries; erros de requisição continuam sendo informados pelo coletor. Não há tentativas de contornar bloqueios.
 
@@ -96,7 +122,7 @@ finally:
 
 ## Escopo da primeira publicação
 
-O primeiro conjunto publicado deve conter o código e a configuração de coleta, os modelos e a persistência atualmente necessários, os testes de coleta, as fixtures sintéticas, a documentação, `.env.example`, `requirements.txt`, `.gitignore` e `data/raw/.gitkeep`.
+O primeiro conjunto publicado deve conter o código e a configuração de coleta, os modelos e a persistência atualmente necessários, os testes de coleta, as fixtures sintéticas, a documentação, `.env.example`, `requirements.txt`, `.gitignore`, `Dockerfile`, `.dockerignore` e `data/raw/.gitkeep`.
 
 Não devem entrar no primeiro commit: `.env`, `properties.json`, snapshots, dados reais, `.venv`, caches, logs e arquivos temporários. Arquivos de análise que possam existir no diretório de trabalho, `src/market_analysis.py` e `tests/test_market_analysis.py`, serão separados posteriormente para o repositório de Analytics e não fazem parte do primeiro conjunto publicado. Esses dois arquivos não são excluídos pelo `.gitignore`; a seleção para o commit deve excluí-los explicitamente.
 
