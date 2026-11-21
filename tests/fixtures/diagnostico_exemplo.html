@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-br"><body>
+<main>
+  <article class="property-card" data-listing-id="123" data-auth-token="secret-fixture">
+    <h2 class="listing-title">Apartamento fictício</h2>
+    <span class="listing-price">R$ 450.000</span>
+    <span class="listing-area">85 m²</span>
+    <span>2 quartos, 1 banheiro, 1 vaga</span>
+    <span class="listing-location">Centro, Porto Alegre</span>
+    <a href="/imovel/123?token=secret-fixture">Detalhes</a>
+  </article>
+  <article class="property-card">
+    <h2>Outro imóvel fictício</h2>
+    <span>R$ 200.000</span><span>50 m²</span>
+    <a href="/imovel/456">Detalhes</a>
+  </article>
+</main>
+<script type="application/ld+json">
+{"@type":"Apartment","name":"Exemplo","url":"/imovel/123","offers":{"price":450000}}
+</script>
+<script type="application/json">
+{"@type":"SearchResults","items":[{"listingId":"123","numberOfBedrooms":2,"floorSize":85}]}
+</script>
+<script>window.__STATE__ = {"items":[{"listingId":"456","price":200000}]};</script>
+</body></html>

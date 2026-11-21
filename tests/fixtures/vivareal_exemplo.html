@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-br">
+<head><title>Exemplo sintético de anúncios</title></head>
+<body>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "item": {
+        "@type": "Apartment",
+        "identifier": "12345",
+        "name": "Apartamento   no Centro",
+        "url": "/imovel/apartamento-12345/",
+        "offers": {"@type": "Offer", "price": "R$ 450.000,00", "priceCurrency": "BRL"},
+        "floorSize": {"@type": "QuantitativeValue", "value": "85,5", "unitCode": "MTK"},
+        "numberOfBedrooms": 2,
+        "numberOfBathroomsTotal": 1,
+        "numberOfParkingSpaces": 1,
+        "address": {
+          "@type": "PostalAddress",
+          "addressNeighborhood": "Centro",
+          "addressLocality": "Porto Alegre",
+          "streetAddress": "Rua Exemplo, 100"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "item": {"@type": "Apartment", "identifier": "67890", "name": "Outro imóvel"}
+    }
+  ]
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "status": "SUCESSO",
+  "finalidade": "vendas",
+  "total": 4,
+  "count": 2,
+  "pagina": 1,
+  "tem_mais": true,
+  "truncado": false,
+  "filtros": {},
+  "items": [
+    {
+      "code": "101",
+      "titulo": "Apartamento ficticio",
+      "tipo": "Apartamento",
+      "bairro": "Centro",
+      "cidade": "Cidade Exemplo",
+      "estado": "RS",
+      "finalidade": "vendas",
+      "area": 85.75,
+      "dormitorios": 2,
+      "suites": 1,
+      "banheiros": 2,
+      "garagens": 1,
+      "valor": 450000,
+      "valor_formatado": "R$ 450.000,00",
+      "valor_condominio": 400,
+      "valor_iptu": 200,
+      "sob_consulta": false,
+      "url": "/vendas/v00101-apartamento"
+    },
+    {
+      "code": "102",
+      "titulo": "Casa ficticia",
+      "bairro": "Norte",
+      "valor": 250000,
+      "url": "/vendas/v00102-casa"
+    }
+  ]
+}

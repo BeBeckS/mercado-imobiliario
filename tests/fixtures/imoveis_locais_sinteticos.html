@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-br">
+<head><meta charset="utf-8"><title>Anúncios fictícios para testes</title></head>
+<body>
+<main>
+  <h1>Imóveis inteiramente fictícios</h1>
+  <article class="property-card" data-listing-id="local-101">
+    <h2>Apartamento no bairro fictício</h2>
+    <span class="listing-price">R$ 450.000,00</span>
+    <span class="listing-area">85,5 m²</span>
+    <span>2 quartos, 2 banheiros, 1 vaga</span>
+    <span class="listing-location">Bairro Exemplo, Porto Alegre</span>
+    <a href="/imovel/local-101">Detalhes</a>
+  </article>
+  <article class="property-card" data-listing-id="local-202">
+    <h2>Apartamento compacto fictício</h2>
+    <span class="listing-price">R$ 275.000,00</span>
+    <span class="listing-area">48 m²</span>
+    <span>1 quarto, 1 banheiro</span>
+    <a href="/imovel/local-202">Detalhes</a>
+  </article>
+</main>
+<script type="application/ld+json">
+{
+  "@type": "ItemList",
+  "itemListElement": [
+    {
+      "@type": "Apartment",
+      "identifier": "local-101",
+      "name": "Apartamento no bairro fictício",
+      "url": "/imovel/local-101",
+      "offers": {"price": "450000.00", "priceCurrency": "BRL"},
+      "floorSize": {"value": "85,5", "unitCode": "MTK"},
+      "numberOfBedrooms": 2,
+      "numberOfBathroomsTotal": 2,
+      "numberOfParkingSpaces": 1,
+      "address": {
+        "streetAddress": "Rua Fictícia, 100",
+        "addressNeighborhood": "Bairro Exemplo",
+        "addressLocality": "Porto Alegre",
+        "addressRegion": "RS"
+      }
+    },
+    {
+      "@type": "Apartment",
+      "identifier": "local-202",
+      "name": "Apartamento compacto fictício",
+      "url": "/imovel/local-202",
+      "offers": {"price": "275000", "priceCurrency": "BRL"},
+      "floorSize": {"value": 48, "unitCode": "MTK"},
+      "numberOfBedrooms": 1,
+      "numberOfBathroomsTotal": 1
+    }
+  ]
+}
+</script>
+</body>
+</html>

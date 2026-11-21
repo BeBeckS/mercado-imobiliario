@@ -1,0 +1,18 @@
+{
+  "status": "SUCESSO",
+  "finalidade": "vendas",
+  "total": 4,
+  "count": 1,
+  "pagina": 3,
+  "tem_mais": false,
+  "truncado": false,
+  "filtros": {},
+  "items": [
+    {
+      "code": "104",
+      "titulo": "Terreno ficticio",
+      "valor": 100000,
+      "url": "/vendas/v00104-terreno"
+    }
+  ]
+}

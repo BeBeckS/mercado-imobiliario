@@ -1,0 +1,29 @@
+{
+  "status": "SUCESSO",
+  "finalidade": "vendas",
+  "total": 4,
+  "count": 2,
+  "pagina": 2,
+  "tem_mais": true,
+  "truncado": false,
+  "filtros": {},
+  "items": [
+    {
+      "code": "102",
+      "titulo": "",
+      "valor": 260000,
+      "url": "/vendas/v00102-casa"
+    },
+    {
+      "code": "103",
+      "titulo": "Imovel sob consulta",
+      "bairro": "",
+      "area": "",
+      "dormitorios": null,
+      "valor": 999000,
+      "valor_formatado": "R$ 999.000,00",
+      "sob_consulta": true,
+      "url": "/vendas/v00103-imovel"
+    }
+  ]
+}
